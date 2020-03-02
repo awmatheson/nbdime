@@ -362,9 +362,8 @@ def init_app(on_port=None, closable=False, **params):
     port = params.pop('port', 0)
     ip = params.pop('ip', '127.0.0.1')
     app = make_app(**params)
-    if ip not in {'127.0.0.1', 'localhost', '::1'}:
-        # enable remote access when listening on a public ip
-        app.settings['allow_remote_access'] = True
+    #pin remote access
+    app.settings['allow_remote_access'] = True
     if port != 0:
         server = app.listen(port, address=ip)
         _logger.info('Listening on %s, port %d', ip, port)
